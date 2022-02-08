@@ -29,6 +29,13 @@
             filled
             class="email-input"
           ></v-text-field>
+
+          <vue-mailchimp-email-signup-form
+            class="mailchimp-email-signup-form"
+            :element-id="'landing-email-signup-form'"
+            :url="mailchimpUrl"
+            :title="''"
+          />
         </v-col>
       </v-row>
 
@@ -71,8 +78,23 @@
 </template>
 
 <script>
+import { VueMailchimpEmailSignupForm } from 'vue-mailchimp-email-signup-form';
+
 export default {
+
   name: 'Entry',
+
+  created() {
+    const emailStored = localStorage.getItem('email');
+
+    if (emailStored != null) {
+      this.$router.push({ name: 'Game' });
+    }
+  },
+
+  components: {
+    'vue-mailchimp-email-signup-form': VueMailchimpEmailSignupForm,
+  },
 
   data() {
     return {
@@ -81,6 +103,7 @@ export default {
         (v) => !!v || 'E-mail is required',
         (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
+      mailchimpUrl: 'https://gmail.us20.list-manage.com/subscribe/post?u=308a9119721f157ef973b8af9&id=8264aeb3c8',
     };
   },
 
@@ -98,14 +121,22 @@ export default {
     },
   },
 
+  watch: {
+    email(newValue) {
+      document.querySelector('#landing-email-signup-formmce-EMAIL').value = newValue;
+    },
+  },
+
   methods: {
     play() {
       if (!this.isEmailValid) {
         return;
       }
 
-      console.log('alors?');
-      // go to demo !
+      localStorage.setItem('email', this.email);
+
+      document.querySelector('#landing-email-signup-formmc-embedded-subscribe').click();
+      // this.$router.push({ name: 'Game' });
     },
   },
 };
@@ -129,6 +160,10 @@ export default {
     margin-left: 17px;
     font-size: 2.3rem;
   }
+}
+
+.mailchimp-email-signup-form {
+  display: none;
 }
 
 .email-info {
