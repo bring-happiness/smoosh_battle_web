@@ -2,7 +2,8 @@
   <div class="main-container">
 
     <v-navigation-drawer
-      style="position: absolute;"
+      width="300"
+      style="position: absolute"
       v-model="drawerOpen"
       :mini-variant.sync="drawerMini"
       permanent
@@ -36,16 +37,38 @@
           >
 
             <v-list dense>
-              <v-list-item
-                link
-              >
+              <v-list-item>
                 <v-list-item-content>
-                  <v-btn
+                  <a
+                    ref="app-store-link"
+                    href="https://apps.apple.com/us/app/smoosh-battle/id1611349442"
+                    target="_blank"
+                  >
+                    <img
+                      src="@/assets/stores/app_store.png"
+                      alt="Download on App Store"
+                    >
+                  </a>
+                </v-list-item-content>
+
+                <v-list-item-content>
+                  <a
+                    ref="apk-download"
+                    href="@/assets/smoosh_battle.apk"
+                    target="_blank"
+                    download
+                  >
+                    <img
+                      src="@/assets/stores/google_play.png"
+                      alt="Download on Google Play">
+                  </a>
+
+                  <!--<v-btn
                     class="btn-get-app"
                     @click="goToDownloadPage"
                   >
                     Get the app
-                  </v-btn>
+                  </v-btn>-->
                 </v-list-item-content>
               </v-list-item>
 
@@ -261,6 +284,15 @@ export default {
     }
   },
 
+  mounted() {
+    // If iOS or Android
+    if (this.getMobileOS() === 'android') {
+      this.$refs['apk-download'].click();
+    } else if (this.getMobileOS() === 'ios') {
+      this.$refs['app-store-link'].click();
+    }
+  },
+
   data() {
     return {
       drawerOpen: true,
@@ -274,9 +306,21 @@ export default {
     },
   },
   methods: {
-    goToDownloadPage() {
-      window.open('https://smooshbattle.itch.io/smoosh-battle', '_blank');
+    getMobileOS() {
+      const ua = navigator.userAgent;
+
+      if (/android/i.test(ua)) {
+        return 'android';
+      }
+      if (/iPad|iPhone|iPod/.test(ua)
+        || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+        return 'ios';
+      }
+      return 'other';
     },
+    /* goToDownloadPage() {
+      window.open('https://smooshbattle.itch.io/smoosh-battle', '_blank');
+    }, */
     goToFindPlayer() {
       window.open('https://discord.com/channels/941359292592844922/941359746626257007', '_blank');
     },
@@ -298,7 +342,7 @@ export default {
 }
 
 .btn-find-players {
-  background: #6200EE !important;
+  background: #FF3FBE !important;
   color: #FDFDFD !important;
 }
 
