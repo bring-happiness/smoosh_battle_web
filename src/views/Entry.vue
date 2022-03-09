@@ -15,7 +15,7 @@
       </v-row>
 
       <v-row justify="center">
-        <v-col cols="4">
+        <v-col cols="10" :sm="6" :md="4" :xl="3">
 
           <div class="email-info text--white">
             Enter email to access the game
@@ -61,7 +61,7 @@
       </v-row>
 
       <v-row class="additionnal-infos" justify="center">
-        <v-col cols="5">
+        <v-col cols="10" :sm="6" :md="4" :xl="3">
 
           <h3>We will notify you when :</h3>
           <p><span class="dot"></span>New characters, features and modes coming in the demo</p>
