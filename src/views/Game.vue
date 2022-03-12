@@ -72,7 +72,7 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item
+              <!--<v-list-item
                 link
               >
                 <v-list-item-content>
@@ -80,10 +80,10 @@
                     class="btn-find-players"
                     @click="goToFindPlayer"
                   >
-                    Find players to play
+                    Find players
                   </v-btn>
                 </v-list-item-content>
-              </v-list-item>
+              </v-list-item>-->
 
               <v-list-item
                 link
@@ -342,7 +342,7 @@ export default {
 }
 
 .btn-find-players {
-  background: #FF3FBE !important;
+  background: #6200EE !important;
   color: #FDFDFD !important;
 }
 
