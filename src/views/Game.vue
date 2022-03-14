@@ -54,9 +54,8 @@
                 <v-list-item-content>
                   <a
                     ref="apk-download"
-                    href="@/assets/smoosh_battle.apk"
+                    href="https://matix.li/21b608a318c2"
                     target="_blank"
-                    download
                   >
                     <img
                       src="@/assets/stores/google_play.png"
